@@ -1,0 +1,18 @@
+version: 2
+
+sources:
+  - name: hospital_raw
+    database: COCO_PRACTICE_DB
+    schema: PRACTICE
+    description: Raw hospital source tables
+    tables:
+      - name: SOURCE_APPOINTMENTS
+        description: Raw appointments data
+      - name: SOURCE_BILLING
+        description: Raw billing data
+      - name: SOURCE_DOCTORS
+        description: Raw doctors data
+      - name: SOURCE_PATIENTS
+        description: Raw patients data
+      - name: SOURCE_TREATMENTS
+        description: Raw treatments data
