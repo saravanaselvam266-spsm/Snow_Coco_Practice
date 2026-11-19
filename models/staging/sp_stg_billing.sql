@@ -8,4 +8,4 @@ select
     amount                 as bill_amount,
     trim(payment_method)   as payment_method,
     trim(payment_status)   as payment_status
-from {{ source('practice', 'SOURCE_BILLING') }}
+from {{ source('hospital_raw', 'SOURCE_BILLING') }}

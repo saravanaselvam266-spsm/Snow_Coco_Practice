@@ -12,4 +12,4 @@ select
     trim(insurance_provider)  as insurance_provider,
     trim(insurance_number)    as insurance_number,
     trim(email)               as email
-from {{ source('practice', 'SOURCE_PATIENTS') }}
+from {{ source('hospital_raw', 'SOURCE_PATIENTS') }}

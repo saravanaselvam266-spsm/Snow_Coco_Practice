@@ -17,35 +17,8 @@ Try running the following commands:
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
 *
 Ú·ğ× 429dce6f0ad5ecbca2c362903f4bf1ef
-¾
-!models/staging/sp_stg_billing.sqlì{{ config(materialized='view') }}
-
-select
-    trim(bill_id)          as bill_id,
-    trim(patient_id)       as patient_id,
-    trim(treatment_id)     as treatment_id,
-    bill_date,
-    amount                 as bill_amount,
-    trim(payment_method)   as payment_method,
-    trim(payment_status)   as payment_status
-from {{ source('practice', 'SOURCE_BILLING') }}
-*
-ü†õ× 7379c2ec70114bed02250f896fe21ce6
-«
-$models/staging/sp_stg_treatments.sqlÖ{{ config(materialized='view') }}
-
-select
-    trim(treatment_id)    as treatment_id,
-    trim(appointment_id)  as appointment_id,
-    trim(treatment_type)  as treatment_type,
-    trim(description)     as treatment_description,
-    cost                  as treatment_cost,
-    treatment_date
-from {{ source('practice', 'SOURCE_TREATMENTS') }}
-*
-û†õ× c453432d7ed3a96052592a9076fb3db9
-É
-&models/staging/sp_stg_appointments.sqlò{{ config(materialized='view') }}
+Í
+&models/staging/sp_stg_appointments.sqlö{{ config(materialized='view') }}
 
 select
     trim(appointment_id)    as appointment_id,
@@ -55,11 +28,25 @@ select
     appointment_time,
     trim(reason_for_visit)  as reason_for_visit,
     trim(status)            as appointment_status
-from {{ source('practice', 'SOURCE_APPOINTMENTS') }}
+from {{ source('hospital_raw', 'SOURCE_APPOINTMENTS') }}
 *
-ú†õ× af7295c0c494362f327514f90b8ca966
-ë
-!models/staging/sp_stg_doctors.sql™{{ config(materialized='view') }}
+¹ú× 51fdb4b0c100e04e214f89d6bd33e039
+Â
+!models/staging/sp_stg_billing.sqlğ{{ config(materialized='view') }}
+
+select
+    trim(bill_id)          as bill_id,
+    trim(patient_id)       as patient_id,
+    trim(treatment_id)     as treatment_id,
+    bill_date,
+    amount                 as bill_amount,
+    trim(payment_method)   as payment_method,
+    trim(payment_status)   as payment_status
+from {{ source('hospital_raw', 'SOURCE_BILLING') }}
+*
+¸ú× 5bd2b56f9aa2ef71ef3061e6efe85964
+ï
+!models/staging/sp_stg_doctors.sql{{ config(materialized='view') }}
 
 select
     trim(doctor_id)        as doctor_id,
@@ -70,11 +57,11 @@ select
     years_experience,
     trim(hospital_branch)  as hospital_branch,
     trim(email)            as email
-from {{ source('practice', 'SOURCE_DOCTORS') }}
+from {{ source('hospital_raw', 'SOURCE_DOCTORS') }}
 *
-ù†õ× 80d54a74c3b24106497c70ef468685f8
-ï
-"models/staging/sp_stg_patients.sqlœ{{ config(materialized='view') }}
+¸ú× c5627066b15f6e936a50086fbbe73641
+ó
+"models/staging/sp_stg_patients.sql {{ config(materialized='view') }}
 
 select
     trim(patient_id)          as patient_id,
@@ -88,9 +75,22 @@ select
     trim(insurance_provider)  as insurance_provider,
     trim(insurance_number)    as insurance_number,
     trim(email)               as email
-from {{ source('practice', 'SOURCE_PATIENTS') }}
+from {{ source('hospital_raw', 'SOURCE_PATIENTS') }}
 *
-ø†õ× 32cf8257e1c11457b2f28f1daef0a461
+¸ú× fba7d1b468c9fe103af873720e122734
+¯
+$models/staging/sp_stg_treatments.sqlÚ{{ config(materialized='view') }}
+
+select
+    trim(treatment_id)    as treatment_id,
+    trim(appointment_id)  as appointment_id,
+    trim(treatment_type)  as treatment_type,
+    trim(description)     as treatment_description,
+    cost                  as treatment_cost,
+    treatment_date
+from {{ source('hospital_raw', 'SOURCE_TREATMENTS') }}
+*
+¸ú× ca6bc1ff66130e7c1e5318d777ef0d7c
 ±
 %models/example/my_first_dbt_model.sqlÛ
 /*

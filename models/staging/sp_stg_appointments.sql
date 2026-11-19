@@ -8,4 +8,4 @@ select
     appointment_time,
     trim(reason_for_visit)  as reason_for_visit,
     trim(status)            as appointment_status
-from {{ source('practice', 'SOURCE_APPOINTMENTS') }}
+from {{ source('hospital_raw', 'SOURCE_APPOINTMENTS') }}

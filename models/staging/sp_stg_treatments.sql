@@ -7,4 +7,4 @@ select
     trim(description)     as treatment_description,
     cost                  as treatment_cost,
     treatment_date
-from {{ source('practice', 'SOURCE_TREATMENTS') }}
+from {{ source('hospital_raw', 'SOURCE_TREATMENTS') }}

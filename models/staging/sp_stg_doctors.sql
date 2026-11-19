@@ -9,4 +9,4 @@ select
     years_experience,
     trim(hospital_branch)  as hospital_branch,
     trim(email)            as email
-from {{ source('practice', 'SOURCE_DOCTORS') }}
+from {{ source('hospital_raw', 'SOURCE_DOCTORS') }}
