@@ -14,3 +14,9 @@ snapshot-paths: ["snapshots"]
 clean-targets:
   - "target"
   - "dbt_packages"
+
+models:
+  coco_practice:
+    staging:
+      +schema: PRACTICE
+      +materialized: view
