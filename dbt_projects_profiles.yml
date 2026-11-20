@@ -1,0 +1,12 @@
+default:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "not needed"
+      user: "not needed"
+      role: COCO_PRACTICE_ROLE
+      warehouse: COCO_PRACTICE_WH
+      database: COCO_PRACTICE_DB
+      schema: PRACTICE
+      threads: 8

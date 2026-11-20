@@ -18,5 +18,4 @@ clean-targets:
 models:
   coco_practice:
     staging:
-      +schema: PRACTICE
       +materialized: view
