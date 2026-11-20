@@ -1,0 +1,77 @@
+version: 2
+
+models:
+  - name: sp_dim_date
+    description: One row per calendar day. Date spine covering all source date columns (appointment, treatment, billing, registration).
+    columns:
+      - name: date_day
+        description: Primary key. Calendar date.
+        tests: [unique, not_null]
+
+  - name: sp_dim_patient
+    description: One row per patient with descriptive attributes.
+    columns:
+      - name: patient_id
+        description: Primary key of the patient.
+        tests: [unique, not_null]
+
+  - name: sp_dim_doctor
+    description: One row per doctor with specialization and branch.
+    columns:
+      - name: doctor_id
+        description: Primary key of the doctor.
+        tests: [unique, not_null]
+
+  - name: sp_fct_appointments
+    description: One row per appointment, with treatment and billing measures.
+    columns:
+      - name: appointment_id
+        description: Primary key of the appointment.
+        tests: [unique, not_null]
+      - name: patient_id
+        tests:
+          - relationships:
+              to: ref('sp_dim_patient')
+              field: patient_id
+      - name: doctor_id
+        tests:
+          - relationships:
+              to: ref('sp_dim_doctor')
+              field: doctor_id
+      - name: appointment_date
+        tests:
+          - relationships:
+              to: ref('sp_dim_date')
+              field: date_day
+
+  - name: sp_fct_billing
+    description: One row per bill. For billing analysis by date, payment status and payment method.
+    columns:
+      - name: bill_id
+        description: Primary key of the bill.
+        tests: [unique, not_null]
+      - name: patient_id
+        tests:
+          - relationships:
+              to: ref('sp_dim_patient')
+              field: patient_id
+      - name: bill_date
+        tests:
+          - relationships:
+              to: ref('sp_dim_date')
+              field: date_day
+      - name: treatment_id
+        tests:
+          - relationships:
+              to: ref('sp_dim_treatment')
+              field: treatment_id
+
+  - name: sp_dim_treatment
+    description: "One row per treatment. For cost analysis use sp_fct_appointments; cost here is for lookup only."
+    columns:
+      - name: treatment_sk
+        description: Surrogate key. md5 hash of treatment_id.
+        tests: [unique, not_null]
+      - name: treatment_id
+        description: Natural key from source.
+        tests: [unique, not_null]
