@@ -17,5 +17,7 @@ clean-targets:
 
 models:
   coco_practice:
+    +database: COCO_PRACTICE_DB
+    +schema: PRACTICE
     staging:
       +materialized: view
